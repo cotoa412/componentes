@@ -12,7 +12,14 @@ import javax.persistence.*;
  *
  */
 @Entity
+@NamedQueries(value = {
+		@NamedQuery(
+				name = "Usuario.findPK", 
+				query = "SELECT u FROM Usuario u WHERE u.Id = :idParam"
+	) 
+})
 @NamedNativeQueries({
+	
 	@NamedNativeQuery(
 			name="Usuario.findAll", 
 			query="SELECT * FROM Usuario", 
@@ -37,6 +44,7 @@ public class Usuario implements Serializable {
 	//@IndexColumn(name="Id")
 	private List<Formulario> Formularios;
 	private static final long serialVersionUID = 1L;
+	
 	
 	
 	public Usuario() {

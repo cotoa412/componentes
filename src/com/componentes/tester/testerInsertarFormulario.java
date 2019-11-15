@@ -3,8 +3,6 @@ package com.componentes.tester;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import com.componentes.dao.UsuarioDAO;
 import com.componentes.entidades.EItem;
 import com.componentes.entidades.Formulario;
 import com.componentes.entidades.Item;
@@ -13,20 +11,49 @@ import com.componentes.entidades.Usuario;
 
 public class testerInsertarFormulario {
 
+	
+	
 	public static void main(String[] args) {
 	
+		testerConnection tester = new testerConnection(); 
+		
+		
+		try {
+			
+			
 
-			Usuario user = new Usuario(); ;
+			Usuario user = new Usuario(); 
+			
 			user.setNombre("Pepe");
 			user.setCorreo("pepe@gmail.com");
 			user.setConstrania("1234");
 			
-			UsuarioDAO d = new UsuarioDAO();
 			
 			
-			d.Insert(user);
+		 List<Formulario> lst = GetDummyForms(user); 
+		
+		 user.setFormulario(lst);
+		 tester.startEntityManagerFactory();
+		 tester.em.getTransaction().begin();
+		 tester.em.persist(user);
+		 tester.em.getTransaction().commit();				
+		 
+		 
+		 
+
 			
 			
+			
+			
+			
+			
+	        } catch (Exception e) {
+	        	System.out.println(e.getMessage());
+	        	
+	            e.printStackTrace();
+	        }finally {
+	        	tester.stopEntityManagerFactory();
+	        }
 	}
 	
 	public static List<Formulario> GetDummyForms(Usuario usurio){

@@ -14,12 +14,7 @@ import org.hibernate.annotations.IndexColumn;
  *
  */
 @Entity
-@NamedQueries(value = {
-		@NamedQuery(
-				name = "Formulario.findPK", 
-				query = "SELECT f FROM Formulario f WHERE f.Id = :idParam"
-	) 
-})
+
 
 @NamedNativeQueries({
 	@NamedNativeQuery(
